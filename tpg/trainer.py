@@ -365,7 +365,7 @@ class Trainer:
 
             actProgMut = (self.generation % 20 >= 10)
             # then mutates
-            child.mutate(self.pDelLrn, self.pAddLrn, self.pMutLrn, oLearners,
+            child.mutate(self.generation,self.pDelLrn, self.pAddLrn, self.pMutLrn, oLearners,
                         self.pMutProg, self.pMutAct, self.pActAtom,
                         self.actions, self.actionLengths, oTeams,
                         self.pDelInst, self.pAddInst, self.pSwpInst, self.pMutInst,

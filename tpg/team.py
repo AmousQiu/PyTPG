@@ -96,7 +96,7 @@ class Team:
     """
     Mutates the learner set of this team.
     """
-    def mutate(self, pDelLrn, pAddLrn, pMutLrn, allLearners,
+    def mutate(self,generation,pDelLrn, pAddLrn, pMutLrn, allLearners,
                 pMutProg, pMutAct, pActAtom, actionCodes, actionLengths, allTeams,
                 pDelInst, pAddInst, pSwpInst, pMutInst, progMutFlag,
                 uniqueProgThresh, inputs=None, outputs=None):
@@ -124,19 +124,23 @@ class Team:
 
         # give chance to mutate all learners
         oLearners = list(self.learners)
-        for learner in oLearners:
-            if flip(pMutLrn):
-                if self.numAtomicActions() == 1 and learner.isActionAtomic():
-                    pActAtom0 = 1 # action must be kept atomic if only one
-                else:
-                    pActAtom0 = pActAtom
+        
+        for _ in range (1):
+            for learner in oLearners:
+                if flip(pMutLrn):
+                    if self.numAtomicActions() == 1 and learner.isActionAtomic():
+                        pActAtom0 = 1 # action must be kept atomic if only one
+                    else:
+                        pActAtom0 = pActAtom
 
-                # must remove then re-add fresh mutated learner
-                self.removeLearner(learner)
-                newLearner = Learner(learner=learner)
-                newLearner.mutate(
+                    # must remove then re-add fresh mutated learner
+                    self.removeLearner(learner)
+                    newLearner = Learner(learner=learner)
+                    newLearner.mutate(
                         pMutProg, pMutAct, pActAtom0, actionCodes, actionLengths,
                         allTeams, self, progMutFlag, pDelInst, pAddInst,
                         pSwpInst, pMutInst, uniqueProgThresh, inputs=None, outputs=None)
 
-                self.addLearner(newLearner)
+                    self.addLearner(newLearner)
+
+        

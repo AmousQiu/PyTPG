@@ -87,3 +87,12 @@ class Learner:
     def saveState(self, state, numStates=50):
         self.states.append(state)
         self.states = self.states[-numStates:]
+
+    """
+    Added Feature! Rampant Mutation,
+    Instead of a single mutation each generation per leaner, perform N mutations
+    Rampant(X, Y)
+    Rampant(1,5) is standard,
+    perform Y mutations every X generations
+    """
+    
